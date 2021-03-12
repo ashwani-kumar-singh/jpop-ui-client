@@ -17,12 +17,11 @@ export default function BooksIssued(props) {
         if (res.status === 200) {
             setIssued([...res.data.responseObject.issued_books])
         }
-        console.log(res)
       }).catch(err => {
         console.log(err, 'error')
       })
     }
-  
+
     return (
       <>
         <NavBar />

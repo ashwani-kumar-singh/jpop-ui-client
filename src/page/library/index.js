@@ -4,7 +4,7 @@ import { Container, Button, Table } from 'react-bootstrap';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { GET_ALL_USER, GET_ALL_BOOKS, ASSIGN_BOOK_BASE_URL } from '../../constants/apiConstants';
+import { GET_ALL_USER, GET_ALL_BOOKS, LIBRARY_ACTION_BASE_URL } from '../../constants/apiConstants';
 
 export default function LibraryPage() {
   const [books, setBook] = useState([]);
@@ -13,15 +13,10 @@ export default function LibraryPage() {
   const [selectedBookId, setSelectedBookId] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
 
-
-
-
-
   const [users, setUser] = useState([]);
   useEffect(() => {
     fetchAllUser();
     fetchAllBooks()
-
   }, [])
 
   const fetchAllUser = () => {
@@ -41,12 +36,9 @@ export default function LibraryPage() {
     })
   }
 
-
-
   const fetchAllBooks = () => {
     axios.get(GET_ALL_BOOKS).then(res => {
       if (res.status === 200) {
-        console.log(res, 'devesh');
         const books = res.data.responseObject;
         const updatedList = books.map(book => ({
           ...book,
@@ -75,7 +67,7 @@ export default function LibraryPage() {
   }
 
   const handleSubmitBooks = () => {
-    axios.post(ASSIGN_BOOK_BASE_URL + `/${selectedUserId}/books/${selectedBookId}`+ `?logged_in=${1}`,  { headers: { "Content-Type": "application/json" }}).then(res=>{
+    axios.post(LIBRARY_ACTION_BASE_URL + `/${selectedUserId}/books/${selectedBookId}`+ `?logged_in=${1}`,  { headers: { "Content-Type": "application/json" }}).then(res=>{
       console.log(res, 'addingbook');
       if(res.status === 200 ){
         setSelectedBookId(null);
@@ -103,7 +95,6 @@ export default function LibraryPage() {
           />
         </div>
         <div style={{ width: '50%' }}>
-
           <Select
             className="basic-multi-select"
             value={books && books.filter((obj) => obj.value === selectedBook)}

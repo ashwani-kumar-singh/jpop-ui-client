@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import NavBar from '../../components/nav';
 import { GET_ALL_BOOKS, DELETE_BOOK } from '../../constants/apiConstants';
 
-
 export default function Books() {
   const [books, setBooks] = useState([]);
   useEffect(() => {

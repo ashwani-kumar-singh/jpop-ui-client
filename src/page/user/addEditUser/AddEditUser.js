@@ -36,8 +36,8 @@ export default function AddUsers(props) {
     let data = {
       first_name, last_name, address, email, contact, password
     }
-    axios.post(POST_NEW_USER + `?logged_in=${1}`, { ...data }, { headers: { "Content-Type": "application/json" } }).then(res => {
-      console.log(res, 'postNewUser')
+    axios.post(POST_NEW_USER + `?logged_in=${1}`, { ...data }, { headers: { "Content-Type": "application/json" } })
+    .then(res => {
     }).catch(err => {
       console.log(err.response, 'error')
     })
@@ -77,14 +77,12 @@ export default function AddUsers(props) {
           onChange={(e) => setAddress(e.target.value)}
           style={{ margin: '5px', padding: '8px', border: '1px solid #cccccc' }}
         />
-
         <input
           placeholder='first_name'
           value={first_name}
           onChange={(e) => setFname(e.target.value)}
           style={{ margin: '5px', padding: '8px', border: '1px solid #cccccc' }}
         />
-
         <input
           placeholder='last_name'
           value={last_name}
@@ -97,7 +95,6 @@ export default function AddUsers(props) {
           onChange={(e) => setPassword(e.target.value)}
           style={{ margin: '5px', padding: '8px', border: '1px solid #cccccc' }}
         />
-
         <Button onClick={!id ? () => postNewUser() : () => putUpdateUser()}>Submit</Button>
       </Container>
     </>

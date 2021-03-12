@@ -4,7 +4,7 @@ import { Container, Button, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import NavBar from '../../../components/nav';
-import { LIBRARY_ACTION_BASE_URL, GET_ALL_USER, ASSIGN_BOOK_BASE_URL } from '../../../constants/apiConstants';
+import { LIBRARY_ACTION_BASE_URL, GET_ALL_USER } from '../../../constants/apiConstants';
 
 const customStyles = {
 	control: () => ({
@@ -23,7 +23,6 @@ export default function LibraryPage(props) {
 
 	useEffect(() => {
 		fetchAllUser();
-		// getAllBooksIssued();
 	}, [])
 
 	const fetchAllUser = () => {
@@ -51,31 +50,26 @@ export default function LibraryPage(props) {
 				setIssued(res.data.responseObject.issued_books)
 			}
 		}).catch(err => {
-			console.log(err, 'error-01')
+			console.log(err, 'error')
 		})
 	}
 
-
-
 	const handleChange = (value) => {
-		console.log(value.id, "hello");
 		setSelectedUser(value.id);
 		getAllBooksIssued(value.id);
 		
 	}
 
 	const deleteBook = (bookId) => {
-		axios.delete(ASSIGN_BOOK_BASE_URL + `/${selectedUser}/books/${bookId}`).then(res=>{
+		axios.delete(LIBRARY_ACTION_BASE_URL + `/${selectedUser}/books/${bookId}`).then(res=>{
 			if(res.status === 200){
 				const prevList = issued;
 				const newList = prevList.filter(book=> book.id !== bookId);
 				setIssued([...newList])
 			}
-			console.log(res, 'deletesuccess')
 		})
 	}
 	
-console.log(issued,"issuedbook")
 	return (
 		<Container fluid>
 			<h1>Return Book</h1>
@@ -84,18 +78,9 @@ console.log(issued,"issuedbook")
 					styles={customStyles}
 					onChange={(e) => handleChange(e)}
 					options={users}
-					//onClick={(e)=>setSelectedUser()}
 					className="basic-multi-select"
 				/>
-
-				{/* <Select
-					//value={user}
-					// onChange={this.handleChange}
-					styles={customStyles}
-					options={issued}
-				/> */}
-			</div>
-			
+			</div>	
 			<div style={{ margin: '40px' }}>
           <Table striped bordered hover>
             <thead>
