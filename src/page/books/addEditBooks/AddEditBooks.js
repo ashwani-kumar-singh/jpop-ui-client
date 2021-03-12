@@ -13,13 +13,13 @@ export default function AddEditBooks() {
   const [cost, setCost] = useState('');
   const [publisher_id, setPubliserId] = useState('');
   const [total_pages, setTotalPage] = useState('');
-  const [published_date, setPublicerDate] = useState('');
+  const [published_date, setPublisherDate] = useState('');
 
   const postNewBook = () => {
     let data = {
       isbn, title, description, author, category, cost, publisher_id, total_pages, published_date
     }
-    axios.post(POST_NEW_BOOK + `?logged_in=${1}`, { data }).then(res => {
+    axios.post(POST_NEW_BOOK + `?logged_in=${1}`, { ...data }, { headers: { "Content-Type": "application/json" } }).then(res => {
       console.log(res, 'postNewBook')
     }).catch(err => {
       console.log(err.response, 'error')
@@ -71,7 +71,7 @@ export default function AddEditBooks() {
           onChange={(e) => setCost(e.target.value)}
           style={{ margin: '5px', padding: '8px', border: '1px solid #cccccc' }}
         />
-        
+
         <input
           placeholder='publisher_id'
           value={publisher_id}
@@ -87,7 +87,7 @@ export default function AddEditBooks() {
         <input
           placeholder='published_date'
           value={published_date}
-          onChange={(e) => setPublicerDate(e.target.value)}
+          onChange={(e) => setPublisherDate(e.target.value)}
           style={{ margin: '5px', padding: '8px', border: '1px solid #cccccc' }}
         />
         <Button onClick={() => postNewBook()}>Submit</Button>

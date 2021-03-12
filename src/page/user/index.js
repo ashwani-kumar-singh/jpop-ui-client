@@ -5,19 +5,9 @@ import { Link } from 'react-router-dom';
 import NavBar from '../../components/nav';
 import { GET_ALL_USER, DELETE_USER } from '../../constants/apiConstants';
 
-const allUsers = [
-  {
-    id: 1,
-    contact: 'contact1',
-    email: 'dummy@gmail.com',
-    address: 'address 1 lane 1, UK',
-    first_name: 'updated fname1',
-    last_name: 'lname1',
-  },
-];
 
 export default function User() {
-  const [user, setUser] = useState([...allUsers]);
+  const [user, setUser] = useState([]);
   useEffect(() => {
     fetchAllUser()
   }, [])
@@ -61,6 +51,7 @@ export default function User() {
                 <th>last_name</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Books Issued</th>
               </tr>
             </thead>
             <tbody>
@@ -80,6 +71,11 @@ export default function User() {
                     </td>
                     <td>
                       <Button variant='danger' onClick={() => deleteUser(user.id)}>Delete</Button>
+                    </td>
+                    <td>
+                      <Link to={`/issued/${user.id}`}>
+                        <Button variant='info'>Issued</Button>
+                      </Link>
                     </td>
                   </tr>
                 ))}

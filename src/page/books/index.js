@@ -5,23 +5,9 @@ import { Link } from 'react-router-dom';
 import NavBar from '../../components/nav';
 import { GET_ALL_BOOKS, DELETE_BOOK } from '../../constants/apiConstants';
 
-const allBooks = [
-  {
-    id: 2,
-    title: 'book2',
-    description: 'book2 description',
-    author: 'author2',
-    category: 'category 2',
-    cost: 1110,
-    isbn: 'AS12344543',
-    total_pages: 10000,
-    publisher_id: 23,
-    published_date: '2019-12-04',
-  },
-];
 
 export default function Books() {
-  const [books, setBooks] = useState([...allBooks]);
+  const [books, setBooks] = useState([]);
   useEffect(() => {
     fetchAllBooks()
   }, [])

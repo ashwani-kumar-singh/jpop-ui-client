@@ -15,8 +15,6 @@ const main = {
   margin: '20px',
 };
 
-
-
 export default function LandingPage() {
   return (
     <MainWrapper>

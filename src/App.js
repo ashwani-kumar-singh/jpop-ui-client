@@ -7,6 +7,8 @@ import LibraryPage from './page/library';
 import AddEditBooks from './page/books/addEditBooks/AddEditBooks';
 import User from './page/user';
 import AddEditUsers from './page/user/addEditUser/AddEditUser';
+import BooksIssued from './page/user/booksIssued/BooksIssued';
+import ReturnBook from './page/library/libraryAction/ReturnBook';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path='/user' exact component={User} />
         <Route path='/user/add' exact component={AddEditUsers} />
         <Route path='/user/:id' exact component={AddEditUsers} />
+        <Route path='/issued/:id' exact component={BooksIssued} />
+        <Route path='/library/return' exact component={ReturnBook} />
     </Switch>
   );
 }
