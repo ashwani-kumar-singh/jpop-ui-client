@@ -50,7 +50,6 @@ export default function LibraryPage(props) {
 			if (res.status === 200) {
 				setIssued(res.data.responseObject.issued_books)
 			}
-			console.log(res, 'devesh')
 		}).catch(err => {
 			console.log(err, 'error-01')
 		})

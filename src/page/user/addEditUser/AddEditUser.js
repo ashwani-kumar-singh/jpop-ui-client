@@ -22,7 +22,6 @@ export default function AddUsers(props) {
   const getUserById = () => {
     axios.get(GET_USER_INFO_BY_ID + `${id}`).then(res => {
       if (res.status === 200) {
-        console.log(res.data, 'devesh');
         const { user_details } = res.data.responseObject;
         setAddress(user_details.address);
         setContact(user_details.contact);
